@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportFactory - Serving the Cycling Community for Over 30 Years</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Header Styles */
+        .top-bar {
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .main-nav {
+            background: #ffffff;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e63946;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Carousel Styles */
+
+   
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-carousel {
+                height: 450px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-carousel {
+                height: 350px;
+            }
+        }
+        
+        .carousel-container {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.3) 0%, rgba(22, 33, 62, 0.2) 50%, transparent 100%);
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5%;
+            max-width: 800px;
+        }
+        
+        .slide-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e63946 0%, #d62839 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease forwards;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        .slide-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.6s ease 0.2s forwards;
+            opacity: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .slide-description {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 30px;
+            line-height: 1.7;
+            animation: fadeInUp 0.6s ease 0.4s forwards;
+            opacity: 0;
+            text-shadow: 1px 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .slide-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.6s forwards;
+            opacity: 0;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #e63946 0%, #d62839 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(230, 57, 70, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Carousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 20;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .carousel-dot.active {
+            background: #e63946;
+            transform: scale(1.2);
+            border-color: white;
+        }
+        
+        .carousel-dot:hover {
+            background: rgba(255,255,255,0.8);
+        }
+        
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-arrow:hover {
+            background: #e63946;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-arrow.prev {
+            left: 20px;
+        }
+        
+        .carousel-arrow.next {
+            right: 20px;
+        }*/
+        
+        /* Category Cards */
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+        
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .category-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 30px 20px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover .overlay {
+            padding-bottom: 30px;
+        }
+        
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #e63946;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .product-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-wishlist:hover {
+            background: #e63946;
+            color: white;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/></svg>');
+            background-size: 100px 100px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: #e63946;
+            line-height: 1;
+        }
+        
+        /* Testimonial Card */
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            font-family: Georgia, serif;
+            font-size: 120px;
+            color: rgba(230, 57, 70, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #e63946 0%, #d62839 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+        }
+        
+        .footer-link {
+            color: rgba(255,255,255,0.7);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-link:hover {
+            color: #e63946;
+            transform: translateX(5px);
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: #e63946;
+            transform: translateY(-5px);
+        }
+        
+        /* Scroll Animation */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Brand Marquee */
+        .brand-marquee {
+            overflow: hidden;
+        }
+        
+        .brand-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Top Bar -->
+    <div class="top-bar py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-sm">
+            <div class="flex items-center gap-6 text-gray-300">
+                <a href="#" class="hover:text-white transition flex items-center gap-2">
+                    <i class="fas fa-phone-alt"></i>
+                    <span class="hidden sm:inline">1-800-CYCLING</span>
+                </a>
+                <a href="#" class="hover:text-white transition flex items-center gap-2">
+                    <i class="fas fa-envelope"></i>
+                    <span class="hidden sm:inline">support@sportfactory.com</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-4 text-gray-300">
+                <a href="#" class="hover:text-white transition">
+                    <i class="fas fa-map-marker-alt mr-1"></i>
+                    <span class="hidden sm:inline">Store Locator</span>
+                </a>
+                <a href="#" class="hover:text-white transition">Track Order</a>
+                <div class="flex items-center gap-3 ml-4">
+                    <a href="#" class="hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Navigation -->
+    <header class="main-nav sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-bicycle text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-black text-2xl text-gray-800 tracking-tight">SPORT</span>
+                        <span class="font-black text-2xl text-red-500 tracking-tight">FACTORY</span>
+                        <p class="text-xs text-gray-500 -mt-1">Since 1994</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-8">
+                    <a href="#" class="nav-link font-semibold text-gray-700 hover:text-red-500">Bikes</a>
+                    <a href="#" class="nav-link font-semibold text-gray-700 hover:text-red-500">Components</a>
+                    <a href="#" class="nav-link font-semibold text-gray-700 hover:text-red-500">Apparel</a>
+                    <a href="#" class="nav-link font-semibold text-gray-700 hover:text-red-500">Accessories</a>
+                    <a href="#" class="nav-link font-semibold text-gray-700 hover:text-red-500">Services</a>
+                    <a href="#" class="nav-link font-semibold text-red-500">Sale</a>
+                </nav>
+                
+                <!-- Right Icons -->
+                <div class="flex items-center gap-4">
+                    <button class="p-2 hover:bg-gray-100 rounded-full transition">
+                        <i class="fas fa-search text-gray-600 text-lg"></i>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-full transition hidden sm:block">
+                        <i class="fas fa-user text-gray-600 text-lg"></i>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-full transition hidden sm:block">
+                        <i class="fas fa-heart text-gray-600 text-lg"></i>
+                    </button>
+                    <button class="relative p-2 hover:bg-gray-100 rounded-full transition">
+                        <i class="fas fa-shopping-bag text-gray-600 text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold">3</span>
+                    </button>
+                    <button class="lg:hidden p-2 hover:bg-gray-100 rounded-full transition">
+                        <i class="fas fa-bars text-gray-600 text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Carousel -->
+    <section class="hero-carousel">
+        <div class="carousel-container" id="carouselContainer">
+            <!-- Slide 1 - Main 30 Years Slide -->
+            <div class="carousel-slide">
+                <div class="slide-background" style="background-image: url('https://i.postimg.cc/k5yLycWK/Celebrating-30-years-of-cycling-champions1-1.png');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-badge">Est. 1994</span><br><br>
+                    <h1 class="slide-title" style="font-size: 2rem;">Serving the Cycling Community for Over 30 Years</h1>
+                    <p class="slide-description">Three decades of passion, expertise, and dedication to every cyclist. From beginners to champions, we've been your trusted partner on every ride.</p>
+                    <div class="slide-buttons">
+                        <button class="btn-primary">Explore Our Story</button>
+                        <button class="btn-secondary">Shop Anniversary Collection</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 - Road Cycling -->
+            <div class="carousel-slide">
+                <div class="slide-background" style="background-image: url('https://i.postimg.cc/1zNrm552/Celebrating-30-years-of-cycling-champions2-1.png');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-badge">New Arrivals</span>
+                    <h1 class="slide-title">Road Performance Collection 2024</h1>
+                    <p class="slide-description">Engineered for speed, built for champions. Discover our latest road bikes featuring cutting-edge aerodynamics and lightweight carbon frames.</p>
+                    <div class="slide-buttons">
+                        <button class="btn-primary">Shop Road Bikes</button>
+                        <button class="btn-secondary">View Specs</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 - Mountain Biking -->
+            <div class="carousel-slide">
+                <div class="slide-background" style="background-image: url('https://i.postimg.cc/BZc9ZJjP/Celebrating-30-years-of-cycling-champions3-1.png');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-badge">Trail Ready</span>
+                    <h1 class="slide-title">Conquer Any Trail</h1>
+                    <p class="slide-description">From rugged mountain paths to technical descents, gear up with bikes and equipment designed to handle the most challenging terrain.</p>
+                    <div class="slide-buttons">
+                        <button class="btn-primary">Shop MTB</button>
+                        <button class="btn-secondary">Find Your Trail</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4 - Urban Cycling -->
+            <div class="carousel-slide">
+                <div class="slide-background" style="background-image: url('https://i.postimg.cc/gJgJ13bJ/Celebrating-30-years-of-cycling-champions4-1.png');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-badge">City Life</span>
+                    <h1 class="slide-title">Urban Commute Reimagined</h1>
+                    <p class="slide-description">Stylish, practical, and eco-friendly. Transform your daily commute with bikes designed for city living and weekend adventures.</p>
+                    <div class="slide-buttons">
+                        <button class="btn-primary">Shop Urban Bikes</button>
+                        <button class="btn-secondary">E-Bike Range</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Carousel Navigation -->
+        <button class="carousel-arrow prev" onclick="prevSlide()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-arrow next" onclick="nextSlide()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <div class="carousel-nav" id="carouselNav">
+            <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+            <span class="carousel-dot" onclick="goToSlide(1)"></span>
+            <span class="carousel-dot" onclick="goToSlide(2)"></span>
+            <span class="carousel-dot" onclick="goToSlide(3)"></span>
+        </div>
+    </section>
+    
+    <!-- Anniversary Banner -->
+    <section class="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 py-4">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-center gap-4 text-white text-center">
+            <i class="fas fa-trophy text-2xl"></i>
+            <span class="font-bold text-lg">Celebrating 30 Years!</span>
+            <span class="hidden sm:inline">|</span>
+            <span>Use code <strong>30YEARS</strong> for 30% off select items</span>
+            <a href="#" class="underline font-semibold hover:no-underline ml-2">Shop Now →</a>
+        </div>
+    </section>
+    
+    <!-- Shop by Category -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 fade-in-up">
+                <span class="text-red-500 font-semibold uppercase tracking-wider">Browse Collection</span>
+                <h2 class="text-4xl md:text-5xl font-black text-gray-800 mt-2">Shop by Category</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 fade-in-up">
+                <div class="category-card">
+                    <img src="https://i.postimg.cc/KvYWWy5j/Chat-GPT-Image-Feb-5-2026-02-07-49-PM.png" alt="Road Bikes">
+                    <div class="overlay">
+                        <h3 class="text-white font-bold text-lg">Road Bikes</h3>
+                        <p class="text-gray-300 text-sm">150+ Products</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.postimg.cc/R0wptCvL/Chat-GPT-Image-Feb-5-2026-02-07-52-PM.png" alt="Mountain Bikes">
+                    <div class="overlay">
+                        <h3 class="text-white font-bold text-lg">Mountain Bikes</h3>
+                        <p class="text-gray-300 text-sm">120+ Products</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.postimg.cc/prmDDkDL/Chat-GPT-Image-Feb-5-2026-02-07-45-PM.png" alt="Apparel">
+                    <div class="overlay">
+                        <h3 class="text-white font-bold text-lg">Cycling Apparel</h3>
+                        <p class="text-gray-300 text-sm">300+ Products</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.postimg.cc/Njq1H6FJ/Chat-GPT-Image-Feb-5-2026-02-08-00-PM.png" alt="Accessories">
+                    <div class="overlay">
+                        <h3 class="text-white font-bold text-lg">Accessories</h3>
+                        <p class="text-gray-300 text-sm">500+ Products</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Products -->
+    <section class="py-20 px-4 bg-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap items-end justify-between mb-12 fade-in-up">
+                <div>
+                    <span class="text-red-500 font-semibold uppercase tracking-wider">Top Picks</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-800 mt-2">Featured Products</h2>
+                </div>
+                <a href="#" class="text-red-500 font-semibold hover:underline mt-4 md:mt-0">View All Products →</a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-in-up">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="relative aspect-square bg-gray-50 p-6">
+                        <span class="product-badge">30% OFF</span>
+                        <div class="product-wishlist">
+                            <i class="far fa-heart"></i>
+                        </div>
+                        <img src="https://i.postimg.cc/KvYWWy5j/Chat-GPT-Image-Feb-5-2026-02-07-49-PM.png" alt="Road Bike" class="w-full h-full object-contain">
+                    </div>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-sm uppercase tracking-wider mb-1">Road Bikes</p>
+                        <h3 class="font-bold text-gray-800 mb-2">Carbon Pro Elite 2024</h3>
+                        <div class="flex items-center gap-1 mb-3">
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star-half-alt text-amber-400 text-sm"></i>
+                            <span class="text-gray-500 text-sm ml-1">(128)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold text-red-500">$2,799</span>
+                            <span class="text-gray-400 line-through">$3,999</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="relative aspect-square bg-gray-50 p-6">
+                        <span class="product-badge bg-green-500">New</span>
+                        <div class="product-wishlist">
+                            <i class="far fa-heart"></i>
+                        </div>
+                        <img src="https://i.postimg.cc/R0wptCvL/Chat-GPT-Image-Feb-5-2026-02-07-52-PM.png" alt="MTB" class="w-full h-full object-contain">
+                    </div>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-sm uppercase tracking-wider mb-1">Mountain Bikes</p>
+                        <h3 class="font-bold text-gray-800 mb-2">Trail Master X500</h3>
+                        <div class="flex items-center gap-1 mb-3">
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <span class="text-gray-500 text-sm ml-1">(89)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold text-gray-800">$3,499</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="relative aspect-square bg-gray-50 p-6">
+                        <div class="product-wishlist">
+                            <i class="far fa-heart"></i>
+                        </div>
+                        <img src="https://i.postimg.cc/prmDDkDL/Chat-GPT-Image-Feb-5-2026-02-07-45-PM.png" alt="Helmet" class="w-full h-full object-contain">
+                    </div>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-sm uppercase tracking-wider mb-1">Helmets</p>
+                        <h3 class="font-bold text-gray-800 mb-2">Aero Shield Pro</h3>
+                        <div class="flex items-center gap-1 mb-3">
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="far fa-star text-amber-400 text-sm"></i>
+                            <span class="text-gray-500 text-sm ml-1">(256)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold text-gray-800">$249</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="relative aspect-square bg-gray-50 p-6">
+                        <span class="product-badge">Best Seller</span>
+                        <div class="product-wishlist">
+                            <i class="far fa-heart"></i>
+                        </div>
+                        <img src="https://i.postimg.cc/Njq1H6FJ/Chat-GPT-Image-Feb-5-2026-02-08-00-PM.png" alt="Jersey" class="w-full h-full object-contain">
+                    </div>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-sm uppercase tracking-wider mb-1">Apparel</p>
+                        <h3 class="font-bold text-gray-800 mb-2">Pro Team Jersey 30th Ed.</h3>
+                        <div class="flex items-center gap-1 mb-3">
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <i class="fas fa-star text-amber-400 text-sm"></i>
+                            <span class="text-gray-500 text-sm ml-1">(412)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold text-gray-800">$129</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section py-20 px-4">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-12 fade-in-up">
+                <span class="text-red-400 font-semibold uppercase tracking-wider">Our Legacy</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mt-2">30 Years of Excellence</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 fade-in-up">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="30">30</div>
+                    <p class="text-white font-semibold mt-2">Years in Business</p>
+                    <p class="text-gray-400 text-sm">Since 1994</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="500">500K+</div>
+                    <p class="text-white font-semibold mt-2">Happy Customers</p>
+                    <p class="text-gray-400 text-sm">And counting</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">50+</div>
+                    <p class="text-white font-semibold mt-2">Store Locations</p>
+                    <p class="text-gray-400 text-sm">Nationwide</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="10000">10K+</div>
+                    <p class="text-white font-semibold mt-2">Products Available</p>
+                    <p class="text-gray-400 text-sm">Premium selection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Community Gallery -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 fade-in-up">
+                <span class="text-red-500 font-semibold uppercase tracking-wider">#SportFactoryRiders</span>
+                <h2 class="text-4xl md:text-5xl font-black text-gray-800 mt-2">Our Community</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Join thousands of cyclists who trust SportFactory for their cycling journey</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 fade-in-up">
+                <div class="aspect-square rounded-xl overflow-hidden">
+                    <img src="https://i.postimg.cc/VvXNQCwr/Celebrating-30-years-of-cycling-champions.png" alt="Community" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden">
+                    <img src="https://i.postimg.cc/tTxqWxYN/Sliders-1.png" alt="Community" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden">
+                    <img src="https://i.postimg.cc/gkNWwDg8/Chat-GPT-Image-Feb-5-2026-02-07-51-PM.png" alt="Community" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden">
+                    <img src="https://i.postimg.cc/JhXvQc5P/Chat-GPT-Image-Feb-5-2026-02-07-48-PM.png" alt="Community" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden">
+                    <img src="https://i.postimg.cc/KvYWWy5j/Chat-GPT-Image-Feb-5-2026-02-07-49-PM.png" alt="Community" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden">
+                    <img src="https://i.postimg.cc/R0wptCvL/Chat-GPT-Image-Feb-5-2026-02-07-52-PM.png" alt="Community" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="py-20 px-4 bg-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 fade-in-up">
+                <span class="text-red-500 font-semibold uppercase tracking-wider">Testimonials</span>
+                <h2 class="text-4xl md:text-5xl font-black text-gray-800 mt-2">What Our Riders Say</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 fade-in-up">
+                <div class="testimonial-card">
+                    <p class="text-gray-600 relative z-10 mb-6">"SportFactory has been my go-to shop for over 15 years. Their expertise and customer service are unmatched. They helped me find the perfect bike for my first triathlon!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center text-white font-bold text-xl">SM</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah Mitchell</h4>
+                            <p class="text-gray-500 text-sm">Triathlete, Member since 2009</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="text-gray-600 relative z-10 mb-6">"The team at SportFactory knows cycling inside and out. They've maintained my fleet of bikes for years and always provide honest advice. True professionals!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-xl">MR</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael Rodriguez</h4>
+                            <p class="text-gray-500 text-sm">Cycling Coach, Member since 2005</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="text-gray-600 relative z-10 mb-6">"From my first kids' bike to my current e-bike, SportFactory has been there for our whole family. Three generations of cyclists trust them completely."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-xl">JC</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Jennifer Chen</h4>
+                            <p class="text-gray-500 text-sm">Family Cyclist, Member since 1998</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section class="newsletter-section py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-4">Join the Ride</h2>
+            <p class="text-white/90 text-lg mb-8">Subscribe for exclusive deals, cycling tips, and be the first to know about new arrivals.</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-full text-gray-800 focus:outline-none focus:ring-4 focus:ring-white/30">
+                <button type="submit" class="bg-gray-900 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition">Subscribe</button>
+            </form>
+            <p class="text-white/70 text-sm mt-4">Get 10% off your first order when you sign up!</p>
+        </div>
+    </section>
+    
+    <!-- Services -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shipping-fast text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">Free Shipping</h3>
+                    <p class="text-gray-500 text-sm">On orders over $99</p>
+                </div>
+                <div class="p-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-2xl text-blue-500"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">Expert Service</h3>
+                    <p class="text-gray-500 text-sm">Professional bike fitting & repairs</p>
+                </div>
+                <div class="p-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-undo text-2xl text-green-500"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">Easy Returns</h3>
+                    <p class="text-gray-500 text-sm">30-day hassle-free returns</p>
+                </div>
+                <div class="p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-2xl text-purple-500"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">24/7 Support</h3>
+                    <p class="text-gray-500 text-sm">Always here to help</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+                <!-- Logo & About -->
+                <div class="lg:col-span-2">
+                    <a href="#" class="flex items-center gap-2 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-bicycle text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-black text-2xl text-white tracking-tight">SPORT</span>
+                            <span class="font-black text-2xl text-red-500 tracking-tight">FACTORY</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 mb-6 max-w-md">Serving the cycling community for over 30 years. Your trusted partner for bikes, gear, and expert service since 1994.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-strava"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Our Story</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="#" class="footer-link">Store Locator</a></li>
+                        <li><a href="#" class="footer-link">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Customer Service -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Customer Service</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link">Contact Us</a></li>
+                        <li><a href="#" class="footer-link">Track Order</a></li>
+                        <li><a href="#" class="footer-link">Shipping Info</a></li>
+                        <li><a href="#" class="footer-link">Returns & Exchanges</a></li>
+                        <li><a href="#" class="footer-link">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link">Bike Fitting</a></li>
+                        <li><a href="#" class="footer-link">Repairs & Maintenance</a></li>
+                        <li><a href="#" class="footer-link">Trade-In Program</a></li>
+                        <li><a href="#" class="footer-link">Financing Options</a></li>
+                        <li><a href="#" class="footer-link">Corporate Sales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Footer -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <p class="text-gray-500 text-sm">&copy;2026 SportFactory. All rights reserved developed by Zannatul. Serving the cycling community for over 30 years.|</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <a href="#" class="text-gray-500 hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition">Accessibility</a>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/100px-Visa_Inc._logo.svg.png" alt="Visa" class="h-6 opacity-60">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/100px-Mastercard-logo.svg.png" alt="Mastercard" class="h-6 opacity-60">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/100px-PayPal.svg.png" alt="PayPal" class="h-6 opacity-60">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Carousel Functionality
+        let currentSlide = 0;
+        const totalSlides = 4;
+        const container = document.getElementById('carouselContainer');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let autoplayInterval;
+        
+        function updateCarousel() {
+            container.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+            resetAutoplay();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+            resetAutoplay();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            resetAutoplay();
+        }
+        
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+        
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+        
+        // Start autoplay on load
+        startAutoplay();
+        
+        // Pause on hover
+        const carousel = document.querySelector('.hero-carousel');
+        carousel.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+        carousel.addEventListener('mouseleave', startAutoplay);
+        
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide();
+            }
+        }
+        
+        // Scroll Animation
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        fadeElements.forEach(el => observer.observe(el));
+        
+        // Header scroll effect
+        const header = document.querySelector('.main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
