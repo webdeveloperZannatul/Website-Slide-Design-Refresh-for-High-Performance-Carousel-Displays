@@ -1,0 +1,2 @@
+# Website-Slide-Design-Refresh-for-High-Performance-Carousel-Displays
+I am a web and UI designer specializing in website slide and banner refresh projects that improve visual impact without disrupting existing layouts or functionality. I focus on pixel-perfect design, fast-loading assets, and seamless integration. My approach ensures refreshed visuals align with brand identity, perform well across devices.
